@@ -33,6 +33,7 @@ class CmdParser:
 				line = (input(self.getPromptStr()))
 			else:
 				line = self.doLines[self.doPtr]
+				readline.add_history(line)
 				self.doPtr += 1
 				self.printPrompt()
 				print(line)
@@ -64,8 +65,6 @@ class CmdParser:
 			line = line.strip()
 			if(line != ''):
 				self.doLines.append(line)
-				readline.add_history(line)
-		self.doPtr = 0
 		f.close()
 		return True
 
