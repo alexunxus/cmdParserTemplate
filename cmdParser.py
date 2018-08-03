@@ -27,12 +27,12 @@ class CmdParser:
 	def executeOneCmd(self):
 		line = ''
 		if len(self.doLines)>0:
-			if self.doPtr > len(self.doLines):
+			if self.doPtr == len(self.doLines):
 				self.doLines = []
 				self.doPtr = 0
 				line = (input(self.getPromptStr()))
 			else:
-				line = self.doLines[self.doPtr - 1]
+				line = self.doLines[self.doPtr]
 				self.doPtr += 1
 				self.printPrompt()
 				print(line)
@@ -65,6 +65,7 @@ class CmdParser:
 			if(line != ''):
 				self.doLines.append(line)
 				readline.add_history(line)
+		self.doPtr = 0
 		f.close()
 		return True
 
