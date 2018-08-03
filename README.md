@@ -1,4 +1,4 @@
-# cmdParserTemplate
+# Command Parser Template
 command parser interface for python
 
 ## Getting started:
