@@ -1,5 +1,6 @@
 import readline
 from commonCmd import *
+import gSet
 
 readline.parse_and_bind('tab: complete')
 readline.parse_and_bind('set editing-mode vi')
@@ -39,6 +40,7 @@ class CmdParser:
 				print(line)
 		else:
 			line = (input(self.getPromptStr()))
+		gSet.myUsg.start()
 		cmd = self.RegCmd(line.split()[0])
 		if cmd!=None:
 			if cmd.isQuitCmd():
@@ -47,6 +49,7 @@ class CmdParser:
 			cmd.execute(line)
 		else:
 			print("Unknown command \""+line.split()[0]+"\"\n")
+		gSet.myUsg.end()
 		return True
 
 	def RegCmd(self, cmd):
@@ -73,5 +76,6 @@ class CmdParser:
 		self.cmdDict['DOfile']	= DofileCmd()
 		self.cmdDict['Quit']	= QuitCmd()
 		self.cmdDict['HELp']	= HelpCmd()
+		self.cmdDict['USAGE']   = USAGE()
 		return True
 

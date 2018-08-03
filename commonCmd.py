@@ -1,6 +1,7 @@
 from util import *
 import readline
 import gSet
+from timeit import default_timer as timer
 
 class ExeCmd:
 	def __init__(self, name="Exename", n=0):
@@ -9,8 +10,8 @@ class ExeCmd:
 	def isCmd(self, cmd):
 		return myStrNcmp(self.exename, cmd, self.nCompulsory)
 	def execute(self, line):
-		print(line, '\n')
-		#print("Should not execute the virtual class ExeCmd!")
+		print("Should not execute the virtual class ExeCmd!")
+		exit()
 	
 	def Usage(self):
 		print("")
@@ -84,4 +85,17 @@ class HelpCmd(ExeCmd):
 
 	def Usage(self):
 		print("HELp: HELp [ command ]")
-	
+
+
+
+class USAGE(ExeCmd):
+	def __init__(self):
+		super(USAGE, self).__init__("USAGE", 5)
+		
+	def execute(self, line):
+		print("Period used time: %.2f s" % gSet.myUsg.getPeriodTime())
+		print("Total time usage: %.2f s" % gSet.myUsg.getTotalTime())
+		endline()
+
+	def Usage(self):
+		print("USAGE: print time usage")
