@@ -44,8 +44,7 @@ class CmdParser:
 		cmd = self.RegCmd(line.split()[0])
 		if cmd!=None:
 			if cmd.isQuitCmd():
-				print('\n')
-				return False
+				return cmd.execute(line)
 			cmd.execute(line)
 		else:
 			print("Unknown command \""+line.split()[0]+"\"\n")

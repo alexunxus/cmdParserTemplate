@@ -24,7 +24,7 @@ class HistoryCmd(ExeCmd):
 	
 	def execute(self, line):
 		for index in range(readline.get_current_history_length()):
-			print(index, ". ", str(readline.get_history_item(index)))
+			print(index, ". ", str(readline.get_history_item(index+1)))
 		print("")
 
 	def Usage(self):
@@ -58,6 +58,23 @@ class QuitCmd(ExeCmd):
 	
 	def Usage(self):
 		print("Quit: Quit [ -Force ]")
+	
+	def execute(self, line):
+		line = lexOptions(line)
+		if len(line) == 0:
+			ans = input("Do you want to quit?[y/n]")
+			if myStrNcmp("Yes", ans.strip() , 1):
+				return False
+			else:
+				return True
+		if len(line) == 1:
+			if myStrNcmp("-Force", line[0], 2):
+				return False
+			print("Unknown argument:\"%s\"" %line[0])
+			return True
+		print("Unkonw argument:\"%s\"" %line[2])
+		return True
+
 
 	def isQuitCmd(self):
 		return True
